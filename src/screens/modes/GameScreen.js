@@ -7,9 +7,11 @@ import {
   TextInput, 
   TouchableWithoutFeedback,
   Keyboard,
-  Alert
+  Alert,
+  TouchableOpacity
 } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+// Remove this import since we're using the React Native core TouchableOpacity
+// import { TouchableOpacity } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { playSound, SOUNDS, unloadSounds } from '../../utils/SoundUtils';
 
@@ -250,42 +252,40 @@ const GameScreen = ({ navigation, route }) => {
           visible={showNameModal}
           animationType="fade"
         >
-          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-            <View style={styles.modalBackground}>
-              <View style={styles.modalContainer}>
-                <Text style={styles.modalTitle}>Enter Player Names</Text>
-                
-                <View style={styles.inputContainer}>
-                  <Text style={styles.inputLabel}>Top Player:</Text>
-                  <TextInput
-                    style={styles.textInput}
-                    value={tempTopName}
-                    onChangeText={setTempTopName}
-                    placeholder="Player A"
-                    maxLength={20}
-                  />
-                </View>
-                
-                <View style={styles.inputContainer}>
-                  <Text style={styles.inputLabel}>Bottom Player:</Text>
-                  <TextInput
-                    style={styles.textInput}
-                    value={tempBottomName}
-                    onChangeText={setTempBottomName}
-                    placeholder="Player B"
-                    maxLength={20}
-                  />
-                </View>
-                
-                <TouchableOpacity
-                  style={styles.saveButton}
-                  onPress={savePlayerNames}
-                >
-                  <Text style={styles.saveButtonText}>Save Names</Text>
-                </TouchableOpacity>
+          <View style={styles.modalBackground}>
+            <View style={styles.modalContainer}>
+              <Text style={styles.modalTitle}>Enter Player Names</Text>
+              
+              <View style={styles.inputContainer}>
+                <Text style={styles.inputLabel}>Top Player:</Text>
+                <TextInput
+                  style={styles.textInput}
+                  value={tempTopName}
+                  onChangeText={setTempTopName}
+                  placeholder="Player A"
+                  maxLength={20}
+                />
               </View>
+              
+              <View style={styles.inputContainer}>
+                <Text style={styles.inputLabel}>Bottom Player:</Text>
+                <TextInput
+                  style={styles.textInput}
+                  value={tempBottomName}
+                  onChangeText={setTempBottomName}
+                  placeholder="Player B"
+                  maxLength={20}
+                />
+              </View>
+              
+              <TouchableOpacity
+                style={styles.saveButton}
+                onPress={savePlayerNames}
+              >
+                <Text style={styles.saveButtonText}>Save Names</Text>
+              </TouchableOpacity>
             </View>
-          </TouchableWithoutFeedback>
+          </View>
         </Modal>
 
         {/* Top Player Timer */}
